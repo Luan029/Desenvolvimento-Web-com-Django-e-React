@@ -1,8 +1,8 @@
 import React from "react";
-const Item = () => {
+const Item = (props) => {
     return(
         <React.Fragment>
-            <h2>Meu item</h2>
+                <li>Item descrição: {props.name}</li>
         </React.Fragment>
     )
 }

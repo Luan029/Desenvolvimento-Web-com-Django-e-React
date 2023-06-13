@@ -1,8 +1,14 @@
 import React from "react";
-const List = () => {
+import Item from "../itens/Item";
+
+const List = (props) => {
     return(
         <React.Fragment>
-            <h2>Minha Lista</h2>
+            <h2>{props.listName}</h2>
+            <ul>
+                <Item name={'Item 1'} />
+                <Item name={'Item 2'} />
+            </ul>
         </React.Fragment>
     )
 }
