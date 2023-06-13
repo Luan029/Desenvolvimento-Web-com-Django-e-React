@@ -1,7 +1,7 @@
 import React from "react";
 import List from "../list/List";
 class UserList extends React.Component{
-    state = { lists: null, loading: true}
+    state = { lists: [], loading: true}
     async componentDidMount(){
         const config = {
             headers: {
@@ -17,12 +17,11 @@ class UserList extends React.Component{
         this.setState({lists: data, loading: false})
     }
     render(){
+        const listsApi = this.state.lists
         return(
             <React.Fragment>
                 <section className="Listas">
-                    <List listName={"Lista 1"} />
-                    <List listName={"Lista 2"} />
-                    <List listName={"Lista 3"} />
+                    {listsApi.map(list => <List key={list.id} listName={list.name} />)}
                 </section>
             </React.Fragment>
         )
