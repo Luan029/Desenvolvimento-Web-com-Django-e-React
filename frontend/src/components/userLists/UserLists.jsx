@@ -21,7 +21,13 @@ class UserList extends React.Component{
         return(
             <React.Fragment>
                 <section className="Listas">
-                    {listsApi.map(list => <List key={list.id} listName={list.name} />)}
+                    {listsApi.map(list =>
+                        <List 
+                            key={list.id}
+                            listName={list.name} 
+                            itens={list.item_set} 
+                        />
+                    )}
                 </section>
             </React.Fragment>
         )
