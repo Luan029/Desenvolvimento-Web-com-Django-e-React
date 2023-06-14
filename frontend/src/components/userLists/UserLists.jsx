@@ -6,10 +6,10 @@ class UserList extends React.Component{
     async componentDidMount(){
         const config = {
             headers: {
-                'Content-Type': 'aplication/json'
+                'Content-Type': 'application/json'
             }
         }
-        config.headers['Authorization'] = 'Token f1580183af78a7b19cc48f0945cd254110d76020'
+        config.headers['Authorization'] = 'Token ' + localStorage.getItem('token')
 
         let url = 'http://127.0.0.1:8000/list/'
         const response = await fetch(url, config)
@@ -19,8 +19,8 @@ class UserList extends React.Component{
     }
     render(){
         const listsApi = this.state.lists
-        let token = ''
-        if(token === ''){
+        let token = localStorage.getItem('token')
+        if(!token){
             return(
                 <Login/>
             )
