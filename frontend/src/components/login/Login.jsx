@@ -1,5 +1,5 @@
 import React from "react";
-
+import UserList from "../userLists/UserLists";
 
 class Login extends React.Component {
     constructor(props) {
@@ -27,26 +27,43 @@ class Login extends React.Component {
         };
         fetch(url, requestOptions)
             .then(response => response.json())
-            .then(data => localStorage.setItem('token', data.token));
+            .then(data => {
+                localStorage.setItem('token', data.token)
+                this.setState({token: data.token})
+        });
         event.preventDefault()
     }
+    sair(){
+        localStorage.removeItem('token')
+        this.setState({token: null})
+    }
     render() {
-        return (
-            <React.Fragment>
-                <h2>Pagina Login</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Login:
-                        <input type="text" value={this.state.login} onChange={this.handleChange} />
-                    </label> <br />
-                    <label>
-                        Password:
-                        <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
-            </React.Fragment>
-        );
+        let token = localStorage.getItem('token')
+        if(!token){
+            return (
+                <React.Fragment>
+                    <h2>Pagina Login</h2>
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Login:
+                            <input type="text" value={this.state.login} onChange={this.handleChange} />
+                        </label> <br />
+                        <label>
+                            Password:
+                            <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
+                </React.Fragment>
+            );
+        }else{
+            return(
+                <React.Fragment>
+                    <UserList/>
+                    <button onClick={() => this.sair()}>Sair</button>
+                </React.Fragment>
+            )
+        }
     }
 }
 export default Login

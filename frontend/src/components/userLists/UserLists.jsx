@@ -1,6 +1,5 @@
 import React from "react";
 import List from "../list/List";
-import Login from "../login/Login";
 class UserList extends React.Component{
     state = { lists: [], loading: true}
     async componentDidMount(){
@@ -19,26 +18,21 @@ class UserList extends React.Component{
     }
     render(){
         const listsApi = this.state.lists
-        let token = localStorage.getItem('token')
-        if(!token){
-            return(
-                <Login/>
-            )
-        }else{
-            return(
-                <React.Fragment>
-                    <section className="Listas">
-                        {listsApi.map(list =>
-                            <List 
-                                key={list.id}
-                                listName={list.name} 
-                                itens={list.item_set} 
-                            />
-                        )}
-                    </section>
-                </React.Fragment>
-            )
-        }
+       
+        return(
+            <React.Fragment>
+                <section className="Listas">
+                    {listsApi.map(list =>
+                        <List 
+                            key={list.id}
+                            listName={list.name} 
+                            itens={list.item_set} 
+                        />
+                    )}
+                </section>
+            </React.Fragment>
+        )
+    
     }
 }
 export default UserList
